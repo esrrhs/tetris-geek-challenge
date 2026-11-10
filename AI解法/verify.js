@@ -18,7 +18,13 @@ function engine() {
 }
 
 function replay(file, dump, returnState = false) {
-  const text = fs.readFileSync(file, 'utf8').trim().split(/\r?\n/);
+  const data = fs.readFileSync(file);
+  const text = data.toString('utf8').trim().split(/\r?\n/);
+  if (text.length > 2) throw Error('Expected a record line and optional score line');
+  const claimedScore = text.length > 1 ? Number(text[1]) : null;
+  if (claimedScore !== null && !Number.isSafeInteger(claimedScore)) {
+    throw Error('Invalid claimed score');
+  }
   const record = text[0].split(',');
   const t = engine();
   let active = false, ended = false, locked = 0, moves = 0;
@@ -86,10 +92,13 @@ function replay(file, dump, returnState = false) {
     }
   }
   if (active) lock();
+  if (claimedScore !== null && claimedScore !== t.score) {
+    throw Error(`Claimed score ${claimedScore} differs from official replay ${t.score}`);
+  }
   const out = {
     file,
     score: t.score,
-    claimedScore: text.length > 1 ? Number(text[1]) : null,
+    claimedScore,
     bricks: locked,
     terminal: ended,
     complete10000: ended && locked === 10000,
@@ -100,6 +109,7 @@ function replay(file, dump, returnState = false) {
     unitMoves: moves,
     clearHistogram: clears,
     meanOccupancyAtClear: occupancySum / clearEvents,
+    fileSha256: crypto.createHash('sha256').update(data).digest('hex'),
     recordSha256: crypto.createHash('sha256').update(text[0]).digest('hex')
   };
   if (dump) fs.writeFileSync(dump, JSON.stringify(snapshots));
@@ -108,6 +118,7 @@ function replay(file, dump, returnState = false) {
 
 if (require.main === module) {
   try {
+    if (!process.argv[2]) throw Error('Usage: node verify.js <result.txt> [snapshots.json]');
     console.log(JSON.stringify(replay(process.argv[2], process.argv[3]), null, 2));
   } catch (e) {
     console.error(e.stack);

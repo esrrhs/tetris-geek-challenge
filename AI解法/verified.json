@@ -1,22 +1,23 @@
 {
-  "file": "AI解法/result-1403060.txt",
-  "score": 1403060,
-  "claimedScore": 1403060,
+  "file": "AI解法/result-1407098.txt",
+  "score": 1407098,
+  "claimedScore": 1407098,
   "bricks": 10000,
   "terminal": true,
   "complete10000": true,
-  "maxBrickMoves": 24,
+  "maxBrickMoves": 23,
   "strictlyExceeds1395326": true,
   "legal": true,
   "aboveBoardLockCount": 0,
-  "unitMoves": 74510,
+  "unitMoves": 74524,
   "clearHistogram": [
-    8734,
-    56,
-    190,
-    522,
-    497
+    8735,
+    64,
+    181,
+    512,
+    507
   ],
-  "meanOccupancyAtClear": 160.09802371541502,
-  "recordSha256": "50596d4537b56a3f48e98efd1acda1c1ec32f2da7338d33370811c6ae13f640a"
+  "meanOccupancyAtClear": 160.11867088607596,
+  "fileSha256": "c25869cac7ccb0aa7d9362c92c83fac66ab66be13850e831dce65f6a6b707be7",
+  "recordSha256": "6b2c06c9fe944e044a0d0a8aee390550ddc934f435a9f9910c51b9d4f3ef4513"
 }
