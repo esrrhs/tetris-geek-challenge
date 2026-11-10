@@ -1,9 +1,9 @@
-# Tetris
+# tetris-geek-challenge
 
-[<img src="https://img.shields.io/github/license/esrrhs/tetris">](https://github.com/esrrhs/tetris)
-[<img src="https://img.shields.io/github/languages/top/esrrhs/tetris">](https://github.com/esrrhs/tetris)
+[<img src="https://img.shields.io/github/license/esrrhs/tetris-geek-challenge">](https://github.com/esrrhs/tetris-geek-challenge)
+[<img src="https://img.shields.io/github/languages/top/esrrhs/tetris-geek-challenge">](https://github.com/esrrhs/tetris-geek-challenge)
 
-tetris是参加[【极客技术挑战赛第四期】鹅罗斯方块](https://geek.qq.com/tetris/#/) 的项目，这个项目是给定一个俄罗斯方块的固定序列，看看谁能消除的分数最高。
+本仓库是参加[【极客技术挑战赛第四期】鹅罗斯方块](https://geek.qq.com/tetris/#/) 的解题记录：给定一个俄罗斯方块的固定序列，看看谁能消除的分数最高。独立的强化学习项目见 [tetris_ai](https://github.com/esrrhs/tetris_ai)，与本仓分开维护。
 
 ![image](./logo.png)
 
@@ -204,3 +204,9 @@ func (g *Grid) GetColumnHeight(col int, quick bool) int {
 ```
 total:9999, totalquick:9963, score:881136, usetime:48h17m47.522467465s
 ```
+
+# AI解法（1,403,060 分）
+
+原 Go 方案 881136 分之外，另有 **C++ 束搜索 + 高底地 + 窗口重规划** 路线（**由纯 AI 独立完成**），用官方 JS 从空盘回放核验为 **1,403,060** 分（超过当时第一名 1,395,326）：
+
+→ 目录 [`AI解法/`](AI解法/)　·　图文说明 [`docs/AI解法.md`](docs/AI解法.md)
